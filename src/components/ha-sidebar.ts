@@ -436,6 +436,12 @@ class HaSidebar extends SubscribeMixin(LitElement) {
     icon?: string | null,
     iconPath?: string | null
   ) {
+    if(!this.hass.user?.is_admin){
+      if(urlPath === "logbook" || urlPath === "media-browser"){
+        return '';
+      }
+    }
+
     return urlPath === "config"
       ? this._renderConfiguration(title)
       : html`
@@ -585,6 +591,10 @@ class HaSidebar extends SubscribeMixin(LitElement) {
   }
 
   private _renderNotifications() {
+    if (!this.hass.user?.is_admin) {
+      return;
+    }
+
     const notificationCount = this._notifications
       ? this._notifications.length
       : 0;
