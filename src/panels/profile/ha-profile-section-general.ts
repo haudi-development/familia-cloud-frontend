@@ -152,59 +152,62 @@ class HaProfileSectionGeneral extends LitElement {
               .narrow=${this.narrow}
               .hass=${this.hass}
             ></ha-pick-theme-row>
-            <ha-pick-dashboard-row
-              .narrow=${this.narrow}
-              .hass=${this.hass}
-            ></ha-pick-dashboard-row>
-            <ha-settings-row .narrow=${this.narrow}>
-              <span slot="heading">
-                ${this.hass.localize(
-                  "ui.panel.profile.customize_sidebar.header"
-                )}
-              </span>
-              <span slot="description">
-                ${this.hass.localize(
-                  "ui.panel.profile.customize_sidebar.description"
-                )}
-              </span>
-              <mwc-button @click=${this._customizeSidebar}>
-                ${this.hass.localize(
-                  "ui.panel.profile.customize_sidebar.button"
-                )}
-              </mwc-button>
-            </ha-settings-row>
-            ${this.hass.dockedSidebar !== "auto" || !this.narrow
+            ${this.hass.user!.is_admin
               ? html`
-                  <ha-force-narrow-row
+                  <ha-pick-dashboard-row
                     .narrow=${this.narrow}
                     .hass=${this.hass}
-                  ></ha-force-narrow-row>
-                `
-              : ""}
-            ${"vibrate" in navigator
-              ? html`
-                  <ha-set-vibrate-row
+                  ></ha-pick-dashboard-row>
+                  <ha-settings-row .narrow=${this.narrow}>
+                    <span slot="heading">
+                      ${this.hass.localize(
+                        "ui.panel.profile.customize_sidebar.header"
+                      )}
+                    </span>
+                    <span slot="description">
+                      ${this.hass.localize(
+                        "ui.panel.profile.customize_sidebar.description"
+                      )}
+                    </span>
+                    <mwc-button @click=${this._customizeSidebar}>
+                      ${this.hass.localize(
+                        "ui.panel.profile.customize_sidebar.button"
+                      )}
+                    </mwc-button>
+                  </ha-settings-row>
+                  ${this.hass.dockedSidebar !== "auto" || !this.narrow
+                    ? html`
+                        <ha-force-narrow-row
+                          .narrow=${this.narrow}
+                          .hass=${this.hass}
+                        ></ha-force-narrow-row>
+                      `
+                    : ""}
+                  ${"vibrate" in navigator
+                    ? html`
+                        <ha-set-vibrate-row
+                          .narrow=${this.narrow}
+                          .hass=${this.hass}
+                        ></ha-set-vibrate-row>
+                      `
+                    : ""}
+                  ${!isExternal
+                    ? html`
+                        <ha-push-notifications-row
+                          .narrow=${this.narrow}
+                          .hass=${this.hass}
+                        ></ha-push-notifications-row>
+                      `
+                    : ""}
+                  <ha-set-suspend-row
                     .narrow=${this.narrow}
                     .hass=${this.hass}
-                  ></ha-set-vibrate-row>
-                `
-              : ""}
-            ${!isExternal
-              ? html`
-                  <ha-push-notifications-row
+                  ></ha-set-suspend-row>
+                  <ha-enable-shortcuts-row
                     .narrow=${this.narrow}
                     .hass=${this.hass}
-                  ></ha-push-notifications-row>
-                `
-              : ""}
-            <ha-set-suspend-row
-              .narrow=${this.narrow}
-              .hass=${this.hass}
-            ></ha-set-suspend-row>
-            <ha-enable-shortcuts-row
-              .narrow=${this.narrow}
-              .hass=${this.hass}
-            ></ha-enable-shortcuts-row>
+                  ></ha-enable-shortcuts-row>
+              `: ""}
           </ha-card>
         </div>
       </hass-tabs-subpage>
