@@ -127,7 +127,7 @@ export class HaAuthorize extends litLocalizeLiteMixin(LitElement) {
         .footer {
           padding-top: 8px;
           display: flex;
-          justify-content: space-between;
+          justify-content: start;
           align-items: center;
         }
         ha-language-picker {
@@ -206,12 +206,6 @@ export class HaAuthorize extends litLocalizeLiteMixin(LitElement) {
           @value-changed=${this._languageChanged}
           inlineArrow
         ></ha-language-picker>
-        <a
-          href="https://www.home-assistant.io/docs/authentication/"
-          target="_blank"
-          rel="noreferrer noopener"
-          >${this.localize("ui.panel.page-authorize.help")}</a
-        >
       </div>
     `;
   }
